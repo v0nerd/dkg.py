@@ -17,11 +17,11 @@
 
 import json
 import math
-import random
 import time
 
 from dkg import DKG
 from dkg.providers import BlockchainProvider, NodeHTTPProvider
+import secrets
 
 node_provider = NodeHTTPProvider("http://localhost:8900")
 blockchain_provider = BlockchainProvider(
@@ -164,7 +164,7 @@ update_asset_result = dkg.asset.update(
                     "@id": "uuid:user:1",
                     "name": "Adam",
                     "lastname": "Smith",
-                    "identifier": f"{math.floor(random.random() * 1e10)}",
+                    "identifier": f"{math.floor(secrets.SystemRandom().random() * 1e10)}",
                 },
             ],
         },
