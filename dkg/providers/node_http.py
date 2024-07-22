@@ -22,6 +22,7 @@ from dkg.dataclasses import HTTPRequestMethod, NodeResponseDict
 from dkg.exceptions import HTTPRequestMethodNotSupported, NodeRequestError
 from dkg.types import URI
 from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
+from security import safe_requests
 
 
 class NodeHTTPProvider:
@@ -43,7 +44,7 @@ class NodeHTTPProvider:
 
         try:
             if method == HTTPRequestMethod.GET:
-                response = requests.get(url, params=params, headers=headers)
+                response = safe_requests.get(url, params=params, headers=headers)
             elif method == HTTPRequestMethod.POST:
                 response = requests.post(url, json=data, headers=headers)
             else:
