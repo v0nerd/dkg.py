@@ -21,8 +21,6 @@ from collections import namedtuple
 from functools import wraps
 from pathlib import Path
 from typing import Any, Type
-
-import requests
 from dkg.constants import BLOCKCHAINS, DEFAULT_GAS_PRICE_GWEI
 from dkg.exceptions import (
     AccountMissing,
@@ -38,6 +36,7 @@ from web3.contract.contract import ContractFunction
 from web3.logs import DISCARD
 from web3.middleware import construct_sign_and_send_raw_middleware
 from web3.types import ABI, ABIFunction, TxReceipt
+from security import safe_requests
 
 
 class BlockchainProvider:
@@ -221,7 +220,7 @@ class BlockchainProvider:
 
         def fetch_gas_price(oracle_url: str) -> Wei | None:
             try:
-                response = requests.get(oracle_url)
+                response = safe_requests.get(oracle_url)
                 response.raise_for_status()
                 data: dict = response.json()
 
