@@ -221,7 +221,7 @@ class BlockchainProvider:
 
         def fetch_gas_price(oracle_url: str) -> Wei | None:
             try:
-                response = requests.get(oracle_url)
+                response = requests.get(oracle_url, timeout=60)
                 response.raise_for_status()
                 data: dict = response.json()
 

@@ -43,9 +43,9 @@ class NodeHTTPProvider:
 
         try:
             if method == HTTPRequestMethod.GET:
-                response = requests.get(url, params=params, headers=headers)
+                response = requests.get(url, params=params, headers=headers, timeout=60)
             elif method == HTTPRequestMethod.POST:
-                response = requests.post(url, json=data, headers=headers)
+                response = requests.post(url, json=data, headers=headers, timeout=60)
             else:
                 raise HTTPRequestMethodNotSupported(
                     f"{method.name} method isn't supported"
